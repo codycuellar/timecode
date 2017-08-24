@@ -12,3 +12,4 @@ dist/*
 build/*
 upload_to_pypi*
 include/*
+.idea/*
