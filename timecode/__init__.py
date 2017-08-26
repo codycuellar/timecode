@@ -22,12 +22,12 @@
 # THE SOFTWARE.
 
 
-__version__ = '0.4.2'
+__version__ = '0.4.3'
 
 
 class Timecode(object):
     def __init__(self, framerate, start_timecode=None, start_seconds=None,
-                 frames=None):
+                 frames=None, start_frame=None):
         """The main timecode class.
 
         Does all the calculation over frames, so the main data it holds is
@@ -56,7 +56,6 @@ class Timecode(object):
         self._int_framerate = None
         self._framerate = None
         self.framerate = framerate
-
         self.frames = None
 
         # attribute override order
@@ -66,6 +65,8 @@ class Timecode(object):
         else:
             if frames is not None:  # because 0==False, and frames can be 0
                 self.frames = frames
+            elif start_frame is not None:
+                self.frames = start_frame + 1
             elif start_seconds is not None:
                 self.frames = self.float_to_tc(start_seconds)
             else:
